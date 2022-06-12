@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin page</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="../static/admin.css">
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <div class="user1">
+                    <img src="../images/3.jpg" alt="">
+                    <span> Nada yasser</span>
+            </div>
+
+            <ul>
+                <li>
+                    <a href="#">
+                        <!-- <span class="icon">
+                            <ion-icon name="logo-apple"></ion-icon>
+                        </span> -->
+                        <span class="title1">Nada yasser</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="../images/home.jpg" alt="">
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="../images/comment-alt.jpg" alt="">
+                        </span>
+                        <span class="title">Posts</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/customers">
+                        <span class="icon">
+                            <img src="../images/chat.jpg" alt="">
+
+                        </span>
+                        <span class="title">Customers</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="../images/helpcenter.jpg" alt="">
+
+                        </span>
+                        <span class="title">Help</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="../images/setting.jpg" alt="">
+
+                        </span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="icon">
+                            <img src="../images/logout.jpg" alt="">
+
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <img src="../images/arrow.jpg" alt="">
+                </div>
+
+                <div class="search">
+                    <label>
+                        <input type="text" placeholder="Search here">
+                        <img src="../images/search.jpg" alt="">
+                    </label>
+                </div>
+
+            </div>
+
+            <!-- ======================= Cards ================== -->
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{accounts.length}}</div>
+                        <div class="cardName">Users</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{posts.length}}</div>
+                        <div class="cardName">Posts</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{maximum}}</div>
+                        <div class="cardName">Most interactions on post</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="cart-outline"></ion-icon>
+                    </div>
+                </div>
+
+            </div>
+<!-- ===========================New post============================ -->
+<!--            <div class="new">-->
+<!--                <div class="new-post">-->
+<!--                    <h2> create post</h2>-->
+<!--                    <img src="../images/plus.jpg" alt="">-->
+<!--                </div>-->
+<!--            </div>-->
+
+            <div class="create-post">
+                <form action="/post/newAdminPost" method="post">
+                    <div class="post22">
+                        <input type="text" name="content" placeholder="Create Post">
+                    </div>
+                    <div class="post33">
+                        <button type="submit">POST</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ================ active posts ================= -->
+            <div class="details">
+                <div class="active-posts">
+                    <div class="cardHeader">
+                        <h2>Active posts</h2>
+                        <a href="#" class="btn">View All</a>
+                    </div>
+                    {{#each results}}
+                    <div class="post-container">
+                        <div class="post-row">
+                            <div class="user-profilee">
+                                <img src="../images/user.jpg">
+                                <div>
+                                    <p>{{this.username}}</p>
+                                    <span>{{this.date}}</span>
+                                </div>
+                            </div>
+                            <a href="#"> <i class="fas fa-ellipsis-v"></i> </a>
+                        </div>
+                        <p class="post-text">{{this.content}}</p>
+<!--                        <img src="../images/2.jpg" class="post-img">-->
+                        <div class="post-row">
+<!--                            <div class="activity-icons">-->
+<!--                                <button><img src="../images/like1.png" alt=""></button>-->
+<!--                                <button id="open"onclick="show_pup()"><img src="../images/comment1.png" alt="">-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                            <div class="post-profile-icon">-->
+<!--                                <img src="../images/user.jpg"> <i class="fas fa-caret-down"></i>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                        {{/each}}
+
+                    <!-- <table>
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Price</td>
+                                <td>Payment</td>
+                                <td>Status</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Star Refrigerator</td>
+                                <td>$1200</td>
+                                <td>Paid</td>
+                                <td><span class="status delivered">Delivered</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Dell Laptop</td>
+                                <td>$110</td>
+                                <td>Due</td>
+                                <td><span class="status pending">Pending</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Apple Watch</td>
+                                <td>$1200</td>
+                                <td>Paid</td>
+                                <td><span class="status return">Return</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Addidas Shoes</td>
+                                <td>$620</td>
+                                <td>Due</td>
+                                <td><span class="status inProgress">In Progress</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Star Refrigerator</td>
+                                <td>$1200</td>
+                                <td>Paid</td>
+                                <td><span class="status delivered">Delivered</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Dell Laptop</td>
+                                <td>$110</td>
+                                <td>Due</td>
+                                <td><span class="status pending">Pending</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Apple Watch</td>
+                                <td>$1200</td>
+                                <td>Paid</td>
+                                <td><span class="status return">Return</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Addidas Shoes</td>
+                                <td>$620</td>
+                                <td>Due</td>
+                                <td><span class="status inProgress">In Progress</span></td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+                </div>
+
+                <!-- ================= New Customers ================ -->
+                <div class="recentCustomers">
+                    <div class="cardHeader">
+                        <h2>Recent Customers</h2>
+                    </div>
+
+                    <table>
+                        {{#each accounts}}
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="../images/3.jpg" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>{{this.username}}</h4>
+                            </td>
+                        </tr>
+                        {{/each}}
+<!--                        <tr>-->
+<!--                            <td width="60px">-->
+<!--                                <div class="imgBx"><img src="../images/3.jpg" alt=""></div>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <h4>Amit <br> <span>India</span></h4>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <td width="60px">-->
+<!--                                <div class="imgBx"><img src="../images/3.jpg" alt=""></div>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <h4>David <br> <span>Italy</span></h4>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <td width="60px">-->
+<!--                                <div class="imgBx"><img src="../images/3.jpg" alt=""></div>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <h4>Amit <br> <span>India</span></h4>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <td width="60px">-->
+<!--                                <div class="imgBx"><img src="../images/3.jpg" alt=""></div>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <h4>David <br> <span>Italy</span></h4>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <td width="60px">-->
+<!--                                <div class="imgBx"><img src="../images/3.jpg" alt=""></div>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <h4>Amit <br> <span>India</span></h4>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <td width="60px">-->
+<!--                                <div class="imgBx"><img src="../images/3.jpg" alt=""></div>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <h4>David <br> <span>Italy</span></h4>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                        <tr>-->
+<!--                            <td width="60px">-->
+<!--                                <div class="imgBx"><img src="../images/customer02.jpg" alt=""></div>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <h4>Amit <br> <span>India</span></h4>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========== Scripts =========  -->
+    <script src="../static/main.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

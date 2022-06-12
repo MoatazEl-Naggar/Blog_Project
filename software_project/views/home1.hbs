@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../static/style.css">
+        <!-- <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script> -->
+        <script src="../../static/script.js"></script>
+        <title>Home Page</title>
+</head>
+
+<body id="post">
+    <nav>
+        <div class="left-nav">
+            <img src="../../images/logo0.jpg" class="logo">
+            <ul>
+                <li><img src="../../images/home.jpg"></li>
+                <li><img src="../../images/notification.jpg"></li>
+                <!-- <li><img src="images/plus.jpg"></li> -->
+            </ul>
+        </div>
+        <div class="right-nav">
+            <div class="search">
+                <img src="../../images/search.jpg">
+                <input type="text" placeholder="search">
+            </div>
+            <div class="user-icon online" onclick="setting_menu_toggle()">
+                <img src="../../images/user.jpg">
+            </div>
+        </div>
+        <!----------------------------------- setting-menu----------------------------->
+        <div class="setting-menu">
+            <div id="dark-mode" class="turn-on">
+                <span></span>
+            </div>
+            <div class="setting-menu-inner">
+                <div class="user-profile">
+                    <img src="../../images/user.jpg">
+                    <div>
+                        <p style="font-weight: 550;">{{user.username}}</p>
+                        <a href="/profile">See your profile</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="user-profile1">
+                    <img src="../../images/feedback.jpg">
+                    <div>
+                        <p style="font-weight: 550;">Give feedback</p>
+                        <a href="error404.html">Help us improve Focus</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="setting-links">
+                    <img src="../../images/setting.jpg" class="setting-icon">
+                    <a href="error404.html">User Setting <img src="../../images/arrow.jpg" width="9px"></a>
+                </div>
+                <div class="setting-links">
+                    <img src="../../images/helpcenter.jpg" class="setting-icon">
+                    <a href="error404.html">Help Center <img src="../../images/arrow.jpg" width="9px"></a>
+                </div>
+                <div class="setting-links">
+                    <img src="../../images/display.jpg" class="setting-icon">
+                    <a href="error404.html">Dark Mode</a>
+                </div>
+                <div class="setting-links">
+                    <img src="../../images/logout.jpg" class="setting-icon">
+                    <a href="/auth/logout">Log Out <img src="../../images/arrow.jpg" width="9px"></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
+    <div class="center">
+        <div class="main-feed">
+        <!----------------------------------------------------create post--------------------------------------------------->
+        <div class="create-post">
+            <div class="post11"><img src="../../images/user.jpg" alt="Profile pic"></div>
+
+              <form action="/post/newPost" method="post">
+                  <div class="post22">
+                      <input type="text" name="content" placeholder="Create Post" required>
+                  </div>
+            <div class="post33">
+                <button>POST</button>
+            </div>
+            </form>
+        </div>
+        <!----------------------------------------------------first post--------------------------------------------------->
+        <div id="postsContainer">
+            {{#each results}}
+         <div class="post-container" id="post{{this.id}}">
+
+            <div class="post-row">
+
+                <div class="user-profilee">
+                    <div onclick="profOpenFunction()" class="user-icon" >  <img src="../../images/user.jpg"></div>
+                    <div>
+                      <p><button onclick="profOpenFunction()" class="txt-btn" id="postUser{{this.id}}">{{this.username}}</button></p>
+                        <span>{{this.date}}</span>
+                    </div>
+                </div>
+                <a href="#"> <i class="fas fa-ellipsis-v"></i> </a>
+            </div>
+            <p class="post-text" id="postContent{{this.id}}">{{this.content}}</p>
+<!--            <img src="../../images/feed1.jpg" class="post-img">-->
+            <div class="post-row">
+                <div class="activity-icons">
+                    <div ><img onclick="likeFunc(this.id)" id='likeBtn{{this.id}}' src="../../images/like1.png"> 120 </div>
+                    <div><button onclick="commentFunc()" class="txt-btn"><img src="../../images/comment1.png"></button>45</div>
+                    <div><button onclick="shareFunc()" class="txt-btn"><img src="../../images/share1.png"></button>20</div>
+                </div>
+                <div class="post-profile-icon">
+                    <img src="../../images/user.jpg"> <i class="fas fa-caret-down"></i>
+                </div>
+            </div>
+
+         </div>
+            {{/each}}
+            </div>
+
+        <script >
+
+        function likeFunc(id){
+          console.log('post liked!');
+          // document.getElementById('likeBtn').src = "images/likeOrange.png";
+          // var x = document.getElementById('likeBtn');
+            const likeBtn = document.getElementById(id);
+          if (likeBtn.src === "http://localhost:3000/images/likeOrange.png") {
+              document.getElementById(id).innerText = '120';
+              likeBtn.src = "images/like1.png";
+                }
+          else {
+              document.getElementById(id).innerHtml= '121';
+              likeBtn.src = "images/likeOrange.png";
+        }
+      }
+        </script>
+        <!--------------------------------------------------second post------------------------------------------------------>
+        <!-- <div class="post-container">
+            <div class="post-row">
+                <div class="user-profilee">
+                    <img src="images/user.jpg">
+                    <div>
+                        <p>Yasmina nosier</p>
+                        <span>june 22 2021, 20:13</span>
+                    </div>
+                </div>
+                <a href="#"> <i class="fas fa-ellipsis-v"></i> </a>
+            </div>
+            <p class="post-text">imagination follow <span>@mark design</span>
+            <a href="#">#Natural</a></p>
+            <img src="images/2.jpg" class="post-img">
+            <div class="post-row">
+                <div class="activity-icons">
+                    <button><img src="images/like1.png" alt=""></button>
+                    <button id="open" onclick="show_pup()"><img src="images/comment1.png" alt="">
+                    </button>
+                    <div class="modal-container" id="modal_container">
+                        <div class="modal" id="pup">
+                            <button id="close" onclick="hide_pup()">
+                                comment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-profile-icon">
+                    <img src="images/user.jpg"> <i class="fas fa-caret-down"></i>
+                </div>
+            </div> -->
+        <!-- </div>
+        ---------------------------------------------------------third post------------------------------------------------------------->
+        <!-- <div class="post-container">
+            <div class="post-row">
+                <div class="user-profilee">
+                    <img src="images/user.jpg">
+                    <div>
+                        <p>Nada yasser</p>
+                        <span>sep 18 2021, 16:08</span>
+                     </div> -->
+                <!-- </div>
+                <a href="#"> <i class="fas fa-ellipsis-v"></i> </a>
+            </div>
+            <p class="post-text">New Pic</a></p>
+            <img src="images/3.jpg" class="post-img">
+            <div class="post-row"> -->
+                <!-- <div class="activity-icons">
+                    <button><img src="images/like1.png" alt=""></button>
+                    <button id="open" onclick="show_pup()"><img src="images/comment1.png" alt="">
+                    </button>
+                    <div class="modal-container" id="modal_container">
+                        <div class="modal" id="pup">
+                            <button id="close" onclick="hide_pup()">
+                                comment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-profile-icon">
+                    <img src="images/user.jpg"> <i class="fas fa-caret-down"></i> -->
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- -------------------------------------categories----------------------------------------------- -->
+    <div class="side-feed">
+        <div class="top">
+            <header style="background-image:url(../../images/background.jpg)">Top Communities</header>
+            <div class="side">
+            <ul>
+                {{#each categories}}
+                    <li><a class="list" id="{{this.id}}" href="#" onclick="chooseCategory(this.id);" >{{this.category}}</a></li>
+                {{/each}}
+
+            </ul>
+        </div>
+        </div>
+
+        <div class="post">
+            <button class="post-button">
+                <a href="#post"><span>Create Post</span></a>
+            </button>
+        </div>
+
+        <div class="buttom">
+            <ul>
+            <div class="leftbuttom">
+                <li><a class="list1" href="#">Help</a></li>
+                <li><a class="list1" href="#">About</a></li>
+                <li><a class="list1" href="#">Blog</a></li>
+                <li><a class="list1" href="#">Terms</a></li>
+                <li><a class="list1" href="#">Content Policy</a></li>
+            </div>
+            <div class="rightbuttom">
+                <li><a class="list1" href="#">Privacy Policy</a></li>
+                <li><a class="list1" href="#">Comunities</a></li>
+                <li><a class="list1" href="#">Topics</a></li>
+            </div>
+            </ul>
+            <br><br>
+            <p> &nbsp&nbsp  Focus &#169 2022, All rights reserved</p>
+        </div>
+    </div>
+</div>
+<script src="../../static/script.js"></script>
+    <script>
+
+        // function likeFunc(){
+        //     console.log('category chosen!');
+        //     // document.getElementById('likeBtn').src = "images/likeOrange.png";
+        //     // var x = document.getElementById('likeBtn');
+        //     // if (document.getElementById('likeBtn').src === "http://localhost:3000/images/likeOrange.png") {
+        //     //     document.getElementById('lC').innerHtml= '120';
+        //     //     document.getElementById('likeBtn').src = "images/like1.png";
+        //     // }
+        //     // else {
+        //     //     document.getElementById('lC').innerHtml= '121';
+        //     //
+        //     //     document.getElementById('likeBtn').src = "images/likeOrange.png";
+        //     //
+        //     //
+        //     // }
+        // }
+
+        function chooseCategory(clicked_id){
+
+            let mainDiv = document.getElementById('postsContainer');
+            let postDiv = document.getElementById('post2');
+            let user = postDiv.getElementById('postUser2');
+            let content = postDiv.getElementById('postContent2');
+
+            const elements = document.getElementsByClassName('post-container');
+            while(elements.length > 0){
+                elements[0].parentNode.removeChild(elements[0]);
+            }
+
+            Pollstack.chartData.push({
+                "options": [
+                    {{#each results}}
+                        {
+                            "id": {{this.id}},
+                            "category": {{this.category}},
+                            "content": "{{this.content}}"
+                        }
+
+                        {{#unless @last}},{{/unless}}
+                    {{/each}}
+                ]
+
+            });
+            let optionss ={{options}}
+            {{#each options}}
+            if({{options.category}} === clicked_id){
+                user.innerText = {{this.username}};
+                content.innerHTML = {{this.content}};
+                mainDiv.appendChild(postDiv);
+                optionss[0].parentNode.removeChild(optionss[0]);
+            }else{
+                optionss[0].parentNode.removeChild(optionss[0]);
+            }
+            {{/each}}
+        }
+    </script>
+</body>
+
+</html>

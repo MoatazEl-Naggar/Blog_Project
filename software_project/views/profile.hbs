@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>profile</title>
+    <!-- style css -->
+    <link rel="stylesheet" href="../static/profile.css">
+    <link rel="script" href="../static/script.js">
+</head>
+<body>
+<nav>
+    <div class="left-nav">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a href="/home" style="text-decoration: none; color: whitesmoke;">Home</a></li>
+            <li class="nav-item">About</li>
+            <li class="nav-item">Instagram</li>
+            <li class="nav-item">Youtube</li>
+        </ul>
+    </div>
+    <div class="right-nav">
+        <div class="search">
+            <img src="images/search.jpg">
+            <input type="text" placeholder="search">
+        </div>
+        <div class="user-icon online" onclick="setting_menu_toggle()">
+            <img src="images/sara profile.jpg">
+        </div>
+    </div>
+    <!----------------------------------- setting-menu----------------------------->
+    <div class="setting-menu">
+        <div id="dark-mode" class="turn-on">
+            <span></span>
+        </div>
+        <div class="setting-menu-inner">
+            <div class="user-profile">
+                <img src="images/sara profile.jpg">
+                <div>
+                    <p style="font-weight: 550;">{{username}}</p>
+                    <a href="/profile">See your profile</a>
+                </div>
+            </div>
+            <hr>
+            <div class="setting-links">
+                <img src="images/feedback.jpg" class="setting-icon">
+                <a href="/contact">Contact Me </a>
+            </div>
+            <hr>
+            <div class="setting-links">
+                <img src="images/setting.jpg" class="setting-icon">
+                <a href="#">User Setting <img src="images/arrow.jpg" width="9px"></a>
+            </div>
+            <div class="setting-links">
+                <img src="images/helpcenter.jpg" class="setting-icon">
+                <a href="#">Help Center <img src="images/arrow.jpg" width="9px"></a>
+            </div>
+            <div class="setting-links">
+                <img src="images/display.jpg" class="setting-icon">
+                <a href="#">Dark Mode</a>
+            </div>
+            <div class="setting-links">
+                <img src="images/logout.jpg" class="setting-icon">
+                <a href="/auth/logout">Log Out <img src="images/arrow.jpg" width="9px"></a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="center">
+    <!----------------------------------------------------first post--------------------------------------------------->
+    <div class="main-feed">
+
+        {{#each results}}
+            <div class="post-container" id="post{{this.id}}">
+                <div class="post-row">
+                    <div class="user-profilee">
+                        <img src="images/sara profile.jpg">
+                        <div>
+                            <p onclick="profOpenFunction()" id="postUser{{this.id}}"><p>{{this.username}}</p></p>
+                            <span>{{this.date}}</span>
+                        </div>
+                    </div>
+                    <a href="#"> <i class="fas fa-ellipsis-v"></i> </a>
+                </div>
+                <p class="post-text" id="postContent{{this.id}}">{{this.content}}</p>
+                <!--                        <img src="images/sara 1.jpg" class="post-img">-->
+                <div class="post-row">
+                    <div class="activity-icons">
+                        <div><img onclick="likeFunc(this.id)"  id='likeBtn{{this.id}}' src="../../images/like1.png"> <p id="lC">{{this.likes}}</p> </div>
+                        <div><img onclick="commentFunc()" src="../images/comment1.png">45</div>
+                        <div><img onclick="shareFunc()" src="../images/share1.png">20</div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    <div class="side-feed">
+        <div class="side">
+            <img src="images/sara profile.jpg">
+            <div>
+                <h2>{{username}}</h2>
+                <p>
+                    Software engineer
+                    <br>
+                    Tanta
+                </p>
+            </div>
+        </div>
+        <div class="post">
+            <button class="post-button">
+                <a href="/home"><span>Create Post</span></a>
+            </button>
+        </div>
+        <div class="post">
+            <button class="post-button">
+                <a href="/home"><span>Create Topic</span></a>
+            </button>
+        </div>
+    </div>
+
+    <script src="../static/script.js"></script>
+</body>
+</html>

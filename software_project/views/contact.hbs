@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>Sara Sabry</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- style css -->
+      <link rel="stylesheet" href="../static/contact.css">
+    </head>
+    <body>
+        <div class="container">
+            <h3>Contact form</h3>
+            <form action="/post/sendMsg" method="post">
+              <label for="fname">Name</label>
+              <input type="text" name="name" placeholder="Your name..">
+          
+              <label for="lname">Email ddress</label>
+              <input type="text" name="email"  placeholder="Your Email address..">
+          
+              <label for="subject">Message</label>
+              <textarea id="message" name="msg" placeholder="Write something.." style="height:200px"></textarea>
+          
+              <input type="submit" value="Send">
+          
+            </form>
+          </div>
+    </body>

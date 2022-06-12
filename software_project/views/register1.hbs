@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Focus</title>
+    <link rel="stylesheet" href="../../static/login.css">
+</head>
+<body>
+<div class="login-form">
+    <div class="text">
+        SIGN UP
+    </div>
+    {{#if msg }}
+    <div class="alert">{{msg}}</div>
+    {{/if}}
+    <form action="/auth/register" method="post">
+        <div class="field">
+            <input type="Name" placeholder="Name" name="name" required>
+        </div>
+        <div class="field">
+            <input type="text" placeholder="Email" name="email" required>
+        </div>
+        <div class="field">
+            <input type="password" placeholder="Password" name="password" required>
+        </div>
+        <div class="field">
+            <input type="password" placeholder=" Confirm Password" name="passwordConfirm" required>
+        </div>
+       <button type="submit">SIGNUP</button>
+
+    </form>
+</div>
+</body>
+</html>

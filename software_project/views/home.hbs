@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Sara Sabry</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- style css -->
+    <link rel="stylesheet" href="../static/home.css">
+    <script src="../static/script.js"></script>
+    </head>
+    <body id="TOP">
+            <nav>
+                <div class="left-nav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" style="color: white;">Home</li>
+                        <li class="nav-item" style="color: white;">About</li>
+                        <li class="nav-item">
+                            <a style="color: white;background-color: transparent;text-decoration:none;"
+                                href="https://www.instagram.com/">Instagram</a></li>
+                        <li class="nav-item">
+                            <a style="color: white;background-color: transparent;text-decoration:none;"
+                               href="https://www.youtube.com/">Youtube</a></li>
+                        {{#unless username}}
+                        <li class="nav-item">
+                            <a style="color: white;background-color: transparent;text-decoration:none;"
+                               href="/login">login</a></li>
+                        {{/unless}}
+                    </ul>
+                </div>
+                <div class="right-nav">
+                    <div class="search">
+                        <img src="images/search.jpg">
+                        <input type="text" placeholder="search">
+                    </div>{{#if username}}
+                    <div class="user-icon online" onclick="setting_menu_toggle()">
+                        <img src="images/user 2 profile.jpg">
+                    </div>{{/if}}
+                </div>
+                <!----------------------------------- setting-menu----------------------------->
+                {{#if username}}
+                    <div class="setting-menu">
+                    <div id="dark-mode" class="turn-on">
+                        <span></span>
+                    </div>
+                    <div class="setting-menu-inner">
+                        <div class="user-profile">
+                            <img src="images/user 2 profile.jpg">
+                            <div>
+                                <p style="font-weight: 550;">{{username}}</p>
+                                <a href="/profile">See your profile</a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="setting-links">
+                            <img src="images/feedback.jpg" class="setting-icon">
+                            <a href="/contact">Contact Me </a>
+                        </div>
+                        <hr>
+                        <div class="setting-links">
+                            <img src="images/setting.jpg" class="setting-icon">
+                            <a href="#">User Setting <img src="images/arrow.jpg" width="9px"></a>
+                        </div>
+                        <div class="setting-links">
+                            <img src="images/helpcenter.jpg" class="setting-icon">
+                            <a href="#">Help Center <img src="images/arrow.jpg" width="9px"></a>
+                        </div>
+                        <div class="setting-links">
+                            <img src="images/display.jpg" class="setting-icon">
+                            <a href="#">Dark Mode</a>
+                        </div>
+                        <div class="setting-links">
+                            <img src="images/logout.jpg" class="setting-icon">
+                            <a href="/auth/logout">Log Out <img src="images/arrow.jpg" width="9px"></a>
+                        </div>
+                    </div>
+                </div>{{/if}}
+            </nav>
+
+            <div class="center">
+                <!------------------------------------------------Create post-------------------------------------------------->
+                <div class="main-feed">
+                    {{#if plan}}
+                    <div class="create-post">
+                        <form action="/post/newPost" method="post">
+                        <div class="post11"><img src="images/user 2 profile.jpg" alt="Profile pic"></div>
+                        <div class="post22">
+                            <input type="text" name="content" placeholder="Create Post">
+                        </div>
+                        <div class="post33">
+                            <button type="submit">POST</button>
+                        </div>
+                        </form>
+                    </div>{{/if}}
+
+                <!------------------------------------------------post 1-------------------------------------------------->
+                    <div id="postsContainer">
+                    {{#each results}}
+                    <div class="post-container" id="post{{this.id}}">
+                        <div class="post-row">
+                            <div class="user-profilee">
+                                <img src="images/sara profile.jpg">
+                                <div>
+                                    <p onclick="profOpenFunction()" id="postUser{{this.id}}" class="txt-btn">{{this.username}}</p>
+                                    <span>{{this.date}}</span>
+                                </div>
+                            </div>
+                            <a href="#"> <i class="fas fa-ellipsis-v"></i> </a>
+                        </div>
+                        <p class="post-text" id="postContent{{this.id}}">{{this.content}}</p>
+<!--                        <img src="images/sara 1.jpg" class="post-img">-->
+                        <div class="post-row">
+                            <div class="activity-icons">
+                                <div><img onclick="likeFunc(this.id);" class="norm-btn" id='likeBtn{{this.id}}' src="../../images/like1.png"> <p id="lC">{{this.likes}}</p></div>
+
+                                <button id="open"onclick="show_pup()" class="norm-btn"><img src="images/comment1.png" alt=""></button>
+                                <div class="modal-container" id="modal_container">
+                                    <div class="modal" id="pup">
+                                        <div class="create-comment" id="comment">
+                                            <div class="co11"><img src="images/user.jpg" alt="Profile pic"></div>
+                                            <div class="co22">
+                                                <input type="text" placeholder="Write your comment">
+                                            </div>
+                                        </div>
+                                        <button id="close" onclick="hide_pup()">
+                                            comment
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+
+                    </div>
+                        {{/each}}
+
+                    </div>
+
+                    <script>
+                        function likeFunc(id){
+                            console.log('post liked!');
+                            const likeBtn = document.getElementById(id);
+                            let parentDiv = likeBtn.parentElement;
+                            let likes = parseInt(parentDiv.children[1].innerHTML);
+                            if (likeBtn.src === "http://localhost:3000/images/likeOrange.png") {
+                                likeBtn.src = "images/like1.png";
+                                likes = likes - 1;
+                                parentDiv.children[1].innerHTML = likes.toString();
+                            }
+                            else {
+                                likeBtn.src = "images/likeOrange.png";
+                                likes += 1;
+                                parentDiv.children[1].innerHTML = likes.toString();
+                            }
+                        }
+                    </script>
+
+                </div>
+                <!-- -------------------------------------categories----------------------------------------------- -->
+                <div class="side-feed">
+                    <div class="top">
+                        <header>Topics</header>
+                        <div class="side">
+                            <ul>
+                                {{#each categories}}
+                                    <li><a class="list" id="{{this.id}}" href="#" onclick="chooseCategory(this.id);" >{{this.category}}</a></li>
+                                {{/each}}
+
+                            </ul>
+                    </div>
+
+
+                    </div>
+
+                    <div class="post">
+                        <button class="post-button">
+                            <a href="#TOP"><span>Create Post</span></a>
+                        </button>
+                    </div>
+
+                    <div class="buttom">
+                        <ul>
+                        <div class="leftbuttom">
+                            <li><a class="list1" href="#">Help</a></li>
+                            <li><a class="list1" href="#">About</a></li>
+                            <li><a class="list1" href="#">Blog</a></li>
+                            <li><a class="list1" href="#">Terms</a></li>
+                            <li><a class="list1" href="#">Content Policy</a></li>
+                        </div>
+                        <div class="rightbuttom">
+                            <li><a class="list1" href="#">Privacy Policy</a></li>
+                            <li><a class="list1" href="#">Comunities</a></li>
+                            <li><a class="list1" href="#">Topics</a></li>
+                        </div>
+                        </ul>
+                        <p> &nbsp&nbsp Focus &#169 2022, All rights reserved</p>
+                    </div>
+                </div>
+            </div>
+
+
+        <script src="../static/script.js"></script>
+            <script>
+                function chooseCategory(clicked_id){
+                    let mainDiv = document.getElementById('postsContainer');
+                    let postDiv = document.getElementById('post2');
+                    let user = postDiv.getElementById('postUser2');
+                    let content = postDiv.getElementById('postContent2');
+
+                    const elements = document.getElementsByClassName('post-container');
+                    while(elements.length > 0){
+                        elements[0].parentNode.removeChild(elements[0]);
+                    }
+
+
+                    let object;
+                    object = object.push({
+                        "options": [
+                            {{#each results}}
+                                {
+                                    "id": {{this.id}},
+                                    "category": {{this.category}},
+                                    "content": "{{this.content}}"
+                                }
+
+                                {{#unless @last}},{{/unless}}
+                            {{/each}}
+                        ]
+
+                    });
+                    {{#each options}}
+                        if(object.category === clicked_id){
+                        user.innerText = {{this.username}};
+                        content.innerHTML = {{this.content}};
+                        mainDiv.appendChild(postDiv);
+                        optionss[0].parentNode.removeChild(optionss[0]);
+                    }else{
+                        optionss[0].parentNode.removeChild(optionss[0]);
+                    }
+                    {{/each}}
+                }
+            </script>
+    </body>
+</html>
